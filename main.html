@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>360 Degree Website</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+        }
+        
+        .container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        .image-container {
+            position: relative;
+            margin: 20px;
+            text-align: center;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            background-color: #fff;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+        }
+        
+        .image-container:hover {
+            transform: translateY(-5px);
+        }
+        
+        .image-container iframe {
+            width: 100%;
+            border-radius: 8px 8px 0 0;
+        }
+        
+        .button-container {
+            margin-top: 10px;
+        }
+        
+        .button-container button {
+            margin: 5px;
+            padding: 8px 16px;
+            font-size: 14px;
+            border: none;
+            border-radius: 4px;
+            background-color: #4CAF50;
+            color: white;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        
+        .button-container button:hover {
+            background-color: #45a049;
+        }
+        
+        .hidden {
+            display: none;
+        }
+        /* Hide buttons in full-screen mode */
+        
+         :fullscreen .button-container {
+            display: none;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+
+        <div class="image-container">
+            <h4>TAJ MAHAL</h4>
+            <iframe id="place1-frame" src="https://momento360.com/e/u/567c67f0907b46b3990be14ded23e90d?utm_campaign=embed&utm_source=other&heading=0&pitch=0&field-of-view=75&size=medium&display-plan=true" frameborder="0"></iframe>
+            <div class="button-container" id="place1-buttons">
+                <button onclick="show360Images('place1', 1)">View 1</button>
+                <button onclick="show360Images('place1', 2)">View 2</button>
+                <button onclick="show360Images('place1', 3)">Video</button>
+                <button onclick="toggleFullScreen('place1-frame')">Full Screen</button>
+            </div>
+        </div>
+
+        <div class="image-container">
+            <h4>INDIA GATE</h4>
+            <iframe id="place2-frame" src="https://momento360.com/e/u/c3963fe70dec451e8b17ddf2f248748e?utm_campaign=embed&utm_source=other&heading=0&pitch=0&field-of-view=75&size=medium&display-plan=true" frameborder="0"></iframe>
+            <div class="button-container" id="place2-buttons">
+                <button onclick="show360Images('place2', 1)">View 1</button>
+                <button onclick="show360Images('place2', 2)">View 2</button>
+                <button onclick="show360Images('place2', 3)">Video</button>
+                <button onclick="toggleFullScreen('place2-frame')">Full Screen</button>
+            </div>
+        </div>
+
+        <div class="image-container">
+            <h4>EIFFEL TOWER</h4>
+            <iframe id="place3-frame" src="https://momento360.com/e/u/7e0d92f08091478e9bd30923bbe33508?utm_campaign=embed&utm_source=other&heading=0&pitch=0&field-of-view=75&size=medium&display-plan=true" frameborder="0"></iframe>
+            <div class="button-container" id="place3-buttons">
+                <button onclick="show360Images('place3', 1)">View 1</button>
+                <button onclick="show360Images('place3', 2)">View 2</button>
+                <button onclick="show360Images('place3', 3)">Video</button>
+                <button onclick="toggleFullScreen('place3-frame')">Full Screen</button>
+            </div>
+        </div>
+
+        <div class="image-container">
+            <h4>MALDIVES</h4>
+            <iframe id="place4-frame" src="https://momento360.com/e/u/aac8a59ca44f40d18b9e1f1c08e8e867?utm_campaign=embed&utm_source=other&heading=-75.9&pitch=-7.2&field-of-view=75&size=medium&display-plan=true" frameborder="0"></iframe>
+            <div class="button-container" id="place4-buttons">
+                <button onclick="show360Images('place4', 1)">View 1</button>
+                <button onclick="show360Images('place4', 2)">View 2</button>
+                <button onclick="show360Images('place4', 3)">Video</button>
+                <button onclick="toggleFullScreen('place4-frame')">Full Screen</button>
+            </div>
+        </div>
+
+    </div>
+
+    <div id="place1-360-images" class="hidden">
+        <!-- Placeholder for Place 1 360-degree images -->
+    </div>
+
+    <div id="place2-360-images" class="hidden">
+        <!-- Placeholder for Place 2 360-degree images -->
+    </div>
+
+    <div id="place3-360-images" class="hidden">
+        <!-- Placeholder for Place 3 360-degree images -->
+    </div>
+
+    <div id="place4-360-images" class="hidden">
+        <!-- Placeholder for Place 4 360-degree images -->
+    </div>
+
+    <script>
+        const placeData = {
+            place1: [
+                "https://momento360.com/e/u/9dce5e36e1894f36b2d3d36dbd161553?utm_campaign=embed&utm_source=other&heading=296.07&pitch=-22.36&field-of-view=75.82&size=medium&display-plan=true",
+                "https://momento360.com/e/u/ecc21c95407943698cb0e7317d243ae4?utm_campaign=embed&utm_source=other&heading=0&pitch=0&field-of-view=75&size=medium&display-plan=true",
+                "JuCcugJEMEg" // Add your YouTube video ID here
+            ],
+            place2: [
+                "https://momento360.com/e/u/c3963fe70dec451e8b17ddf2f248748e?utm_campaign=embed&utm_source=other&heading=0&pitch=0&field-of-view=75&size=medium&display-plan=true",
+                "https://momento360.com/e/u/514262b85977490d9cd2449509cfd1cc?utm_campaign=embed&utm_source=other&heading=0&pitch=0&field-of-view=75&size=medium&display-plan=true",
+                "KMptHvl-EuE" // Add your YouTube video ID here
+            ],
+            place3: [
+                "https://momento360.com/e/u/7e0d92f08091478e9bd30923bbe33508?utm_campaign=embed&utm_source=other&heading=0&pitch=0&field-of-view=75&size=medium&display-plan=true",
+                "https://momento360.com/e/u/8d0fc2c13741400f996ca7f7fbc013e7?utm_campaign=embed&utm_source=other&heading=0&pitch=0&field-of-view=75&size=medium&display-plan=true",
+                "nbD8XYTw23Y" // Add your YouTube video ID here
+            ],
+            place4: [
+                "https://momento360.com/e/u/5bfd6a1f85d74524bacb0a6ae22ba6df?utm_campaign=embed&utm_source=other&heading=0&pitch=0&field-of-view=75&size=medium&display-plan=true",
+                "https://momento360.com/e/u/7d93b538cbd34a678946c0cdaca92c98?utm_campaign=embed&utm_source=other&heading=0&pitch=0&field-of-view=75&size=medium&display-plan=true",
+                "jqq_ZdD5Zwg" // Add your YouTube video ID here
+            ]
+        };
+
+        function show360Images(place, index) {
+            const iframe = document.getElementById(place + '-frame');
+            const container = document.getElementById(place + '-360-images');
+            if (index === 3) {
+                // If it's the third view, load the YouTube video
+                const youtubeVideoId = placeData[place][index - 1];
+                iframe.src = 'https://www.youtube.com/embed/' + youtubeVideoId + '?autoplay=1';
+            } else {
+                // Otherwise, load the Momento360 link
+                iframe.src = placeData[place][index - 1];
+            }
+            container.classList.toggle('hidden');
+        }
+
+        function toggleFullScreen(frameId) {
+            const iframe = document.getElementById(frameId);
+            if (iframe.requestFullscreen) {
+                iframe.requestFullscreen();
+            } else if (iframe.mozRequestFullScreen) { /* Firefox */
+                iframe.mozRequestFullScreen();
+            } else if (iframe.webkitRequestFullscreen) { /* Chrome, Safari & Opera */
+                iframe.webkitRequestFullscreen();
+            } else if (iframe.msRequestFullscreen) { /* IE/Edge */
+                iframe.msRequestFullscreen();
+            }
+        }
+    </script>
+
+</body>
+
+</html>
